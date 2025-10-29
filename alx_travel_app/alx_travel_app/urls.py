@@ -5,7 +5,7 @@ The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -25,4 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Swagger UI available at /swagger/
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+]
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('listings.urls')),  # include the app routes
 ]
